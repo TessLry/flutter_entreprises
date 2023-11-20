@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_entreprises/models/Company.dart';
+import 'package:flutter_entreprises/models/address.dart';
+import 'package:flutter_entreprises/router.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,9 +12,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List<Company> _companies = [
-    const Company('Entreprise 1'),
-    const Company('Entreprise 2'),
-    const Company('Entreprise 3'),
+    const Company('Entreprise 1', Address('street', 'city', 'postcode')),
+    const Company('Entreprise 2', Address('street', 'city', 'postcode')),
+    const Company('Entreprise 3', Address('street', 'city', 'postcode')),
   ];
 
   void _addCompany(Company company) {
@@ -35,8 +37,9 @@ class _HomeState extends State<Home> {
             child: ListView.separated(
           itemCount: _companies.length,
           itemBuilder: (BuildContext context, int index) {
+            final company = _companies[index];
             return ListTile(
-              title: Text(_companies[index].name),
+              title: Text(company.name),
               onTap: () {},
             );
           },
@@ -46,16 +49,15 @@ class _HomeState extends State<Home> {
         )),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            //Navigator.of(context).pushNamed('/add_company');
             final Company? company = await Navigator.of(context)
-                .pushNamed('/add_company') as Company?;
+                .pushNamed(AppRouter.addCompanyPage) as Company?;
             if (company != null) {
               _addCompany(company);
             }
           },
-          child: const Icon(Icons.add, color: Colors.white),
           backgroundColor: Colors.blue,
           shape: const CircleBorder(),
+          child: const Icon(Icons.add, color: Colors.white),
         ));
   }
 }

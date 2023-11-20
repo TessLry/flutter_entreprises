@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_entreprises/models/Company.dart';
+import 'package:flutter_entreprises/models/address.dart';
+import 'package:flutter_entreprises/router.dart';
 
 class AddCompany extends StatelessWidget {
   AddCompany({Key? key}) : super(key: key);
@@ -44,11 +46,25 @@ class AddCompany extends StatelessWidget {
                       return null;
                     },
                   ),
+                  TextFormField(
+                    readOnly: true,
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(AppRouter.searchAddressPage),
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0))),
+                      prefixIcon: Icon(Icons.location_on, color: Colors.grey),
+                      hintText: 'Adresse de l\'entreprise',
+                      hintStyle: TextStyle(color: Colors.grey),
+                    ),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       final String name = _textFieldController.text;
                       if (_formKey.currentState!.validate()) {
-                        Company company = Company(name);
+                        Company company = Company(
+                            name, Address('street', 'city', 'postcode'));
                         Navigator.of(context).pop(company);
                       }
                     },
