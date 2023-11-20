@@ -48,7 +48,7 @@ class AddCompany extends StatelessWidget {
                     onPressed: () {
                       final String name = _textFieldController.text;
                       if (_formKey.currentState!.validate()) {
-                        Company company = Company(0, name);
+                        Company company = Company(name);
                         Navigator.of(context).pop(company);
                       }
                     },
