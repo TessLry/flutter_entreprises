@@ -12,9 +12,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final List<Company> _companies = [
-    const Company('Entreprise 1', Address('street', 'city', 'postcode')),
-    const Company('Entreprise 2', Address('street', 'city', 'postcode')),
-    const Company('Entreprise 3', Address('street', 'city', 'postcode')),
+    const Company('Entreprise 1', Address('Rue 1', 'Ville 1', '12345')),
+    const Company('Entreprise 2', Address('Rue 2', 'Ville 2', '12345')),
+    const Company('Entreprise 3', Address('Rue 3', 'Ville 3', '12345')),
   ];
 
   void _addCompany(Company company) {
@@ -40,6 +40,8 @@ class _HomeState extends State<Home> {
             final company = _companies[index];
             return ListTile(
               title: Text(company.name),
+              subtitle: Text(
+                  '${company.address.street}, ${company.address.postcode} ${company.address.city}'),
               onTap: () {},
             );
           },

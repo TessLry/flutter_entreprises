@@ -60,7 +60,7 @@ class _SearchAddressState extends State<SearchAddress> {
                   leading: const Icon(Icons.location_on, color: Colors.grey),
                   title: Text(address.street),
                   subtitle: Text('${address.postcode} ${address.city}'),
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).pop(address),
                 );
               },
             ))

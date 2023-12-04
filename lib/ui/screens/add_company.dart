@@ -7,7 +7,9 @@ class AddCompany extends StatelessWidget {
   AddCompany({Key? key}) : super(key: key);
 
   final TextEditingController _textFieldController = TextEditingController();
+  final TextEditingController _addressFieldController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
+  Address? _address;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +50,21 @@ class AddCompany extends StatelessWidget {
                   ),
                   TextFormField(
                     readOnly: true,
-                    onTap: () => Navigator.of(context)
-                        .pushNamed(AppRouter.searchAddressPage),
+                    onTap: () async {
+                      _address = await Navigator.of(context)
+                          .pushNamed(AppRouter.searchAddressPage) as Address?;
+                      if (_address != null) {
+                        _addressFieldController.text =
+                            '${_address!.street}, ${_address!.city}, ${_address!.postcode}';
+                      }
+                    },
+                    controller: _addressFieldController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez saisir l\'adresse de l\'entreprise';
+                      }
+                      return null;
+                    },
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius:
@@ -63,8 +78,7 @@ class AddCompany extends StatelessWidget {
                     onPressed: () {
                       final String name = _textFieldController.text;
                       if (_formKey.currentState!.validate()) {
-                        Company company = Company(
-                            name, Address('street', 'city', 'postcode'));
+                        Company company = Company(name, _address!);
                         Navigator.of(context).pop(company);
                       }
                     },
