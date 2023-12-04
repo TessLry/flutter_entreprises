@@ -19,4 +19,16 @@ class Address {
   String toString() {
     return '$street, $city, $postcode';
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'street': street,
+      'city': city,
+      'postcode': postcode,
+    };
+  }
+
+  factory Address.fromJson(Map<String, dynamic> json) {
+    return Address(json['street'], json['city'], json['postcode']);
+  }
 }
