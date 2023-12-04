@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_entreprises/models/Company.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_entreprises/blocs/company_cubit.dart';
+import 'package:flutter_entreprises/models/company.dart';
 import 'package:flutter_entreprises/models/address.dart';
 import 'package:flutter_entreprises/router.dart';
 
@@ -83,10 +85,12 @@ class _AddCompanyState extends State<AddCompany> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      final String name = _textFieldController.text;
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate() &&
+                          _address != null) {
+                        String name = _textFieldController.text;
                         Company company = Company(name, _address!);
-                        Navigator.of(context).pop(company);
+                        context.read<CompanyCubit>().addCompany(company);
+                        Navigator.of(context).pop();
                       }
                     },
                     style: ElevatedButton.styleFrom(
