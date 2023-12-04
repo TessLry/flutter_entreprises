@@ -40,8 +40,7 @@ class _HomeState extends State<Home> {
             final company = _companies[index];
             return ListTile(
               title: Text(company.name),
-              subtitle: Text(
-                  '${company.address.street}, ${company.address.postcode} ${company.address.city}'),
+              subtitle: Text(company.address.toString()),
               onTap: () {},
             );
           },

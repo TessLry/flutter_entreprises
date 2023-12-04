@@ -14,4 +14,9 @@ class Address {
 
     return Address(street, city, postcode);
   }
+
+  @override
+  String toString() {
+    return '$street, $city, $postcode';
+  }
 }

@@ -62,8 +62,7 @@ class _AddCompanyState extends State<AddCompany> {
                       _address = await Navigator.of(context)
                           .pushNamed(AppRouter.searchAddressPage) as Address?;
                       if (_address != null) {
-                        _addressFieldController.text =
-                            '${_address!.street}, ${_address!.city}, ${_address!.postcode}';
+                        _addressFieldController.text = _address!.toString();
                       }
                     },
                     controller: _addressFieldController,
