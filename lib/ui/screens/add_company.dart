@@ -3,12 +3,20 @@ import 'package:flutter_entreprises/models/Company.dart';
 import 'package:flutter_entreprises/models/address.dart';
 import 'package:flutter_entreprises/router.dart';
 
-class AddCompany extends StatelessWidget {
-  AddCompany({Key? key}) : super(key: key);
+class AddCompany extends StatefulWidget {
+  const AddCompany({Key? key}) : super(key: key);
 
+  @override
+  State<AddCompany> createState() => _AddCompanyState();
+}
+
+class _AddCompanyState extends State<AddCompany> {
   final TextEditingController _textFieldController = TextEditingController();
+
   final TextEditingController _addressFieldController = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey();
+
   Address? _address;
 
   @override

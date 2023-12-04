@@ -9,7 +9,7 @@ class AppRouter {
 
   static final routes = {
     homePage: (context) => const Home(),
-    addCompanyPage: (context) => AddCompany(),
+    addCompanyPage: (context) => const AddCompany(),
     searchAddressPage: (context) => const SearchAddress(),
   };
 }
